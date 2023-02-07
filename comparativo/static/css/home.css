@@ -1,0 +1,119 @@
+* {
+    margin: 0;
+}
+
+body {
+    height: 100vh;
+    overflow: hidden;
+}
+
+main {
+    height: 90%;
+    width: 100%;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: lightslategray;
+    height: 10%;
+    width: 100%;
+}
+
+header div {
+    margin: 5px 10px;
+}
+
+.links {
+    gap: 10px;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.car-selection {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px;
+}
+
+.cars-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    gap: 20px;
+}
+
+.combobox {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin: 10px;
+    font-size: 20px;
+    gap: 5px;
+}
+
+.car1 {
+    padding: 15px 50px;
+}
+
+.car2 {
+    padding: 15px 50px;
+}
+
+.cars-form {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    height: 100%;
+  }
+
+.car-selection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.combobox {
+    background-color: #555;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 20px 0;
+    text-align: center;
+    width: 250px;
+}
+
+.combobox label {
+    font-weight: bold;
+}
+
+.combobox select {
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    background-color: #777;
+    color: #fff;
+}
+
+#form-btn {
+    background-color: #b00;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 20px 40px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 60px;
+    font-size: 25px;
+}
+
+#form-btn:hover {
+    background-color: #d22;
+}

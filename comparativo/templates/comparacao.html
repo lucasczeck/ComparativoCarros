@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Lucas Czeck">
+  <meta name="description" content="Você quer comprar uma BMW ou uma Mercedes?">
+  <link rel="stylesheet" href="{% static 'css/comparacao.css' %}">
+  <title>{{ car1.marca }} - {{ car1.modelo }} X {{ car2.marca }} - {{ car2.modelo }}</title>
+  <style type="text/css">
+    .split.left::before {
+      background-color: {{ car1.bg }};
+    }
+    .split.right::before {
+      background-color: {{ car2.bg }};
+    }
+    .split.left .btn:hover {
+    background-color: {{ car1.bg_btn }};
+    border-color: {{ car1.bg_btn }};
+    }
+    .split.right .btn:hover {
+    background-color: {{ car2.bg_btn }};
+    border-color: {{ car2.bg_btn }};
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="split left" style="background-image: url('{{ MEDIA_URL }}{{ car1.img_path }}')">
+      <h1 id="title-left">{{ car1.marca }}</h1>
+      <a class="btn" id="btn-left" onclick="open_left()">Especificações</a>
+      <div class="specs-left" style="background-color: {{ car1.bg_specs }}">
+        <img src="{% static '/img/fechar.png' %}" alt="Ícone para fechar" onclick="close_left()">
+        <ul>
+          <li><span>Motor:</span> {{ car1.motor }} </li>
+          <li><span>Câmbio:</span> {{ car1.cambio }} </li>
+          <li><span>Comprimento:</span> {{ car1.comprimento }}cm </li>
+          <li><span>Largura:</span>  {{ car1.largura }}cm </li>
+          <li><span>Altura:</span>  {{ car1.altura }}cm </li>
+          <li><span>Entre-eixos:</span>  {{ car1.entre_eixos }}cm </li>
+          <li><span>Peso:</span>  {{ car1.peso }}kg </li>
+          <li><span>Preço:</span>  R$ {{ car1.preco }} </li>
+        </ul>
+      </div>
+    </div>
+    <div class="split right" style="background-image: url('{{ MEDIA_URL }}{{ car2.img_path }}')">
+       <h1 id="title-right">{{ car2.marca }}</h1>
+       <a class="btn" id="btn-right" onclick="open_right()">Especificações</a>
+       <div class="specs-right" style="background-color: {{ car2.bg_specs }}">
+         <img src="{% static '/img/fechar.png' %}" alt="Ícone para fechar" onclick="close_right()">
+         <ul>
+           <li><span>Motor:</span> {{ car2.motor }} </li>
+          <li><span>Câmbio:</span> {{ car2.cambio }} </li>
+          <li><span>Comprimento:</span> {{ car2.comprimento }}cm </li>
+          <li><span>Largura:</span>  {{ car2.largura }}cm </li>
+          <li><span>Altura:</span>  {{ car2.altura }}cm </li>
+          <li><span>Entre-eixos:</span>  {{ car2.entre_eixos }}cm </li>
+          <li><span>Peso:</span>  {{ car2.peso }}kg </li>
+          <li><span>Preço:</span>  R$ {{ car2.preco }} </li>
+         </ul>
+       </div>
+     </div>
+  </div>
+
+  <script src="{% static 'js/comparacao.js' %}"></script>
+</body>
+
+</html>

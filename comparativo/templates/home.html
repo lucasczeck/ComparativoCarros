@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+{% block meta %}
+
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <title>Comparativo de carros!</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+{% endblock %}
+
+
+
+<body>
+    <header>
+        <div class="logo">
+           <h3>inserir aqui a logo</h3>
+        </div>
+        <div class="tituloCentral">
+            <h1>Compare seus carros favoritos!</h1>
+        </div>
+        <div class="links">
+            <a>Cadastrar carro</a>
+            <a>Sair</a>
+        </div>
+    </header>
+
+    {% block content %}
+        <main>
+            <form class="cars-form" action="{% url 'comparar' %}" method="get" >
+                {% csrf_token %}
+                <div class="car-selection">
+                    <div class="car1">
+                        <div class="combobox">
+                           <label >Marca:</label>
+                           <select id="brand1" name="brand1">
+                               <option selected disabled>Selecione</option>
+                                {% for brand in brands %}
+                                   <option value="{{ brand }}">{{ brand }}</option>
+                                {% endfor %}
+                           </select>
+                        </div>
+                        <div class="combobox">
+                            <label>Modelo:</label>
+                            <select id="model1" disabled name="model1">
+                                <option selected disabled>Selecione o modelo</option>
+                                {% for model in models %}
+                                    <option data-brand="{{ model.marca_id }}"
+                                            value="{{ model.modelo }}">{{ model.nm_descritivo }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="combobox">
+                            <label>Ano:</label>
+                            <select id="year1" disabled name="year1">
+                                <option selected disabled>Selecione o ano</option>
+                                {% for year in years %}
+                                    <option data-model="{{ year.modelo }}"
+                                            value="{{ year.ano }}">{{ year.ano }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="car2">
+                        <div class="combobox">
+                           <label >Marca:</label>
+                               <select id="brand2" disabled name="brand2">
+                               <option selected disabled>Selecione</option>
+                                {% for brand in brands %}
+                                   <option value="{{ brand }}">{{ brand }}</option>
+                                {% endfor %}
+                               </select>
+                        </div>
+                        <div class="combobox">
+                            <label>Modelo:</label>
+                            <select id="model2" disabled name="model2">
+                                <option selected disabled>Selecione o modelo</option>
+                                {% for model in models %}
+                                    <option data-brand="{{ model.marca_id }}"
+                                            value="{{ model.modelo }}">{{ model.nm_descritivo }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="combobox">
+                            <label>Ano:</label>
+                            <select id="year2" disabled name="year2">
+                                <option selected disabled>Selecione o ano</option>
+                                {% for year in years %}
+                                    <option data-model="{{ year.modelo }}"
+                                            value="{{ year.ano }}">{{ year.ano }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" id="form-btn" value="Comparar" disabled>
+            </form>
+        </main>
+    {% endblock %}
+
+    {% block js %}
+        <script src="{% static 'js/home.js' %}"></script>
+    {% endblock %}
+</body>
+
+</html>
