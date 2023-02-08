@@ -18,7 +18,7 @@ class Login(View):
         if user is not None:
             login(self.request, user)
             # Redirecionar o usuário para a página desejada
-            return redirect('home')
+            return redirect('/comparativo')
         else:
             # Mostrar uma mensagem de erro
             return HttpResponse("Nome de usuário ou senha inválidos.")
