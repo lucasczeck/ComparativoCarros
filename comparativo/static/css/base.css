@@ -2,9 +2,10 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: lightslategray;
+    background-color: #555;
     height: 10%;
     width: 100%;
+    color: #fff;
 }
 
 header div {
@@ -12,5 +13,12 @@ header div {
 }
 
 .links {
-    gap: 10px;
+    gap: 15px;
+}
+
+header a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    margin: 0 5px;
 }

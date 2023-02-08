@@ -41,3 +41,9 @@ class Comparar(View):
         }
 
         return render(request=self.request, template_name='home.html', context=context)
+
+
+class CadastrarCarro(View):
+
+    def get(self, *args, **kwargs):
+        return render(self.request, 'cadastrar_carro.html')

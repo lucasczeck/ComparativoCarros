@@ -7,30 +7,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Lucas Czeck">
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
-    <title>Login - Compara Carros</title>
+    <title>Cadastro - Compara Carros</title>
   </head>
-  <body>
+<body>
     <header>
-      <h1>Bem-vindo ao nosso site</h1>
+      <h1>Faça seu cadastro!</h1>
     </header>
     <main>
-      <form action="{% url "login" %}" method="post">
+      <form action="{% url 'cadastro' %}" method="post" id="cadastro">
         {% csrf_token %}
-        <h2>Login</h2>
+        <h2>Cadastro</h2>
         <div>
           <label for="username">Usuário:</label>
           <input type="text" id="username" name="username">
         </div>
         <div>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email">
+        </div>
+        <div>
           <label for="password">Senha:</label>
           <input type="password" id="password" name="password">
         </div>
-        <button type="submit">Entrar</button>
-        <p>Ainda não é cadastrado? <a href="{% url 'cadastro' %}">Cadastre-se aqui</a></p>
+        <button type="submit">Cadastrar</button>
+        <p>Já é cadastrado? <a href="{% url 'login' %}">Faça login aqui</a></p>
       </form>
     </main>
-    <footer>
+    <footer class="footer-cadastro" style="position: relative">
       <p>Copyright © 2023</p>
     </footer>
-  </body>
+</body>
 </html>
