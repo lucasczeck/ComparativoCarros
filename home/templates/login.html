@@ -14,7 +14,8 @@
       <h1>Bem-vindo ao nosso site</h1>
     </header>
     <main>
-      <form action="/login" method="post">
+      <form action="{% url "login" %}" method="post">
+        {% csrf_token %}
         <h2>Login</h2>
         <div>
           <label for="username">Usuário:</label>
@@ -27,23 +28,23 @@
         <button type="submit">Entrar</button>
         <p>Ainda não é cadastrado? <a href="#cadastro">Cadastre-se aqui</a></p>
       </form>
-      <form action="/cadastro" method="post" id="cadastro">
-        <h2>Cadastro</h2>
-        <div>
-          <label for="username">Usuário:</label>
-          <input type="text" id="username" name="username">
-        </div>
-        <div>
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email">
-        </div>
-        <div>
-          <label for="password">Senha:</label>
-          <input type="password" id="password" name="password">
-        </div>
-        <button type="submit">Cadastrar</button>
-        <p>Já é cadastrado? <a href="#">Faça login aqui</a></p>
-      </form>
+{#      <form action="/cadastro" method="post" id="cadastro">#}
+{#        <h2>Cadastro</h2>#}
+{#        <div>#}
+{#          <label for="username">Usuário:</label>#}
+{#          <input type="text" id="username" name="username">#}
+{#        </div>#}
+{#        <div>#}
+{#          <label for="email">Email:</label>#}
+{#          <input type="email" id="email" name="email">#}
+{#        </div>#}
+{#        <div>#}
+{#          <label for="password">Senha:</label>#}
+{#          <input type="password" id="password" name="password">#}
+{#        </div>#}
+{#        <button type="submit">Cadastrar</button>#}
+{#        <p>Já é cadastrado? <a href="#">Faça login aqui</a></p>#}
+{#      </form>#}
     </main>
     <footer>
       <p>Copyright © 2023</p>
