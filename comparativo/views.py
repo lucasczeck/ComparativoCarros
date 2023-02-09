@@ -46,4 +46,19 @@ class Comparar(View):
 class CadastrarCarro(View):
 
     def get(self, *args, **kwargs):
-        return render(self.request, 'cadastrar_carro.html')
+        marcas = BO.comparativo.comparativo.Home.get_brands()
+        paises = BO.comparativo.comparativo.Home.get_countries()
+
+        context = {
+            'marcas': marcas,
+            'paises': paises
+        }
+
+        return render(self.request, 'cadastrar_carro.html', context)
+
+
+class CadastrarMarca(View):
+
+    def post(self, *args, **kwargs):
+        marca = self.request.POST.get('marca')
+        pais = self.request.POST.get('pais')

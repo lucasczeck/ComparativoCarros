@@ -14,6 +14,80 @@
 
 
 <body>
+    {% block content %}
+        <main>
+            <h2>Cadastre um carro</h2>
+            <form id="cadastroCarros">
+                {% csrf_token %}
+                <div class="input">
+                    <div class="label">
+                        <label>Marca:</label>
+                        <select id="marca" class="campo-input" name="marca">
+                            {% for i in marcas %}
+                                <option value="{{ i }}">{{ i }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="btn-modal">
+                        <button id="btn-modal" type="button"><img src="{% static "abrirModal.svg" %}"></button>
+                    </div>
+                </div>
 
+                <div class="input">
+                    <div class="label">
+                        <label>Modelo:</label>
+                        <input type="text" name="modelo" class="campo-input" required>
+                    </div>
+                </div>
+
+                <div class="input">
+                    <div class="label">
+                        <label>Ano:</label>
+                        <input type="text" name="ano" class="campo-input">
+                    </div>
+                </div>
+
+                <div>
+                    <input type="submit" value="Enviar para análise">
+                </div>
+            </form>
+            <div class="modal-marca" id="modal-marca" style="display: none">
+                <form id="form-marca" method="post" action="{% url "cadastrar_marca" %}">
+                    {% csrf_token %}
+                    <div class="input">
+                        <div class="label">
+                            <label>Marca:</label>
+                            <input type="text" name="marca" class="campo-input">
+                        </div>
+                    </div>
+                    <div class="input">
+                        <div class="label">
+                            <label>País de origem:</label>
+                            <select id="marca" class="campo-input" name="pais">
+                                {% for i in paises %}
+                                    <option value="{{ i }}">{{ i }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <input type="submit" value="Cadastrar marca">
+                    </div>
+                </form>
+            </div>
+        </main>
+
+        <footer class="footer-cadastro" style="position: relative">
+          <p>Copyright © 2023</p>
+        </footer>
+    {% endblock %}
+    {% block js %}
+        <script>
+            $("#btn-modal").on("click", function() {
+              $('#modal-marca').removeAttr("style")
+            });
+        </script>
+    {% endblock %}
 </body>
 

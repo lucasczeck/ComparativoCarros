@@ -3,7 +3,6 @@ import comparativo.models
 
 class Comparar:
 
-
     def get_infos_car(self, car):
         car_filter = car
         if car_filter['versao'] is None:
@@ -82,3 +81,9 @@ class Home:
         years = comparativo.models.Carro.objects.all().values('modelo', 'ano')
 
         return years
+
+    @staticmethod
+    def get_countries():
+        countries = comparativo.models.Pais.objects.all().values_list('nome', flat=True)
+
+        return countries
