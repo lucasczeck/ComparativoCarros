@@ -36,3 +36,9 @@ class Carro(models.Model):
     cor_specs = ColorField(null=True)
     path = models.FileField(upload_to='cars_img', null=True)
     nm_descritivo = models.CharField(max_length=200, null=True)
+
+
+class CarrosPendentes(models.Model):
+    marca = models.ForeignKey('Marca', on_delete=models.DO_NOTHING)
+    modelo = models.CharField(max_length=100, null=True)
+    ano = models.IntegerField(null=True)

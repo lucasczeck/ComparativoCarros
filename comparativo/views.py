@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
@@ -56,9 +57,28 @@ class CadastrarCarro(View):
 
         return render(self.request, 'cadastrar_carro.html', context)
 
+    def post(self, *args, **kwargs):
+        marca = self.request.POST.get('marca')
+        modelo = self.request.POST.get('modelo')
+        ano = self.request.POST.get('ano')
+
+        status = BO.comparativo.comparativo.Cadastros.save_car(marca=marca, modelo=modelo, ano=ano)
+
+        if status:
+            return redirect('/comparativo')
+        else:
+            return HttpResponse('Erro ao cadastrar carro')
+
 
 class CadastrarMarca(View):
 
     def post(self, *args, **kwargs):
         marca = self.request.POST.get('marca')
         pais = self.request.POST.get('pais')
+
+        status = BO.comparativo.comparativo.Cadastros.save_brand(marca=marca, pais=pais)
+
+        if status:
+            return redirect("/comparativo/cadastrar")
+        else:
+            return HttpResponse("Erro ao cadastrar meta")

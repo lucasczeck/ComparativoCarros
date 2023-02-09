@@ -66,7 +66,7 @@ class Home:
 
     @staticmethod
     def get_brands():
-        brands = comparativo.models.Marca.objects.all().values_list('nome', flat=True)
+        brands = comparativo.models.Marca.objects.filter(status=True).values_list('nome', flat=True)
 
         return brands
 
@@ -87,3 +87,30 @@ class Home:
         countries = comparativo.models.Pais.objects.all().values_list('nome', flat=True)
 
         return countries
+
+
+class Cadastros:
+
+    @staticmethod
+    def save_brand(pais=None, marca=None):
+
+        new_brand = comparativo.models.Marca()
+
+        new_brand.nome = marca
+        new_brand.pais_origem_id = pais
+        new_brand.status = False
+        new_brand.save()
+
+        return True
+
+    @staticmethod
+    def save_car(marca=None, modelo=None, ano=None):
+
+        new_car = comparativo.models.CarrosPendentes()
+
+        new_car.marca_id = marca
+        new_car.modelo = modelo
+        new_car.ano = ano
+        new_car.save()
+
+        return True
