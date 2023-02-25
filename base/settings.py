@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'base',
     'home',
     'comparativo',
+    'admin'
 ]
 
 MIDDLEWARE = [

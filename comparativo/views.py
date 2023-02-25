@@ -1,6 +1,5 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.urls import reverse
 from django.views import View
 
 import BO.comparativo.comparativo
@@ -9,6 +8,8 @@ import BO.comparativo.comparativo
 class Comparacao(View):
 
     def get(self, *args, **kwargs):
+        if not self.request.user.pk:
+            return redirect('login')
         modelos = [self.request.GET.get('model1'), self.request.GET.get('model2')]
         marcas = [self.request.GET.get('brand1'), self.request.GET.get('brand2')]
         anos = [self.request.GET.get('year1'), self.request.GET.get('year2')]
@@ -20,10 +21,8 @@ class Comparacao(View):
         car_infos1 = BO.comparativo.comparativo.Comparar().get_infos_car(car=carro1)
         car_infos2 = BO.comparativo.comparativo.Comparar().get_infos_car(car=carro2)
 
-        context = {
-            'car1': car_infos1,
-            'car2': car_infos2
-        }
+        context = {'car1': car_infos1,
+                   'car2': car_infos2}
 
         return render(self.request, 'comparacao.html', context=context)
 
@@ -31,15 +30,15 @@ class Comparacao(View):
 class Comparar(View):
 
     def get(self, *args, **kwargs):
+        if not self.request.user.pk:
+            return redirect('login')
         brands = BO.comparativo.comparativo.Home().get_brands()
         car_models = BO.comparativo.comparativo.Home().get_car_models()
         years = BO.comparativo.comparativo.Home().get_model_years()
 
-        context = {
-            'brands': list(brands),
-            'models': list(car_models),
-            'years': list(years),
-        }
+        context = {'brands': list(brands),
+                   'models': list(car_models),
+                   'years': list(years)}
 
         return render(request=self.request, template_name='home.html', context=context)
 
@@ -47,13 +46,13 @@ class Comparar(View):
 class CadastrarCarro(View):
 
     def get(self, *args, **kwargs):
+        if not self.request.user.pk:
+            return redirect('login')
         marcas = BO.comparativo.comparativo.Home.get_brands()
         paises = BO.comparativo.comparativo.Home.get_countries()
 
-        context = {
-            'marcas': marcas,
-            'paises': paises
-        }
+        context = {'marcas': marcas,
+                   'paises': paises}
 
         return render(self.request, 'cadastrar_carro.html', context)
 
@@ -81,4 +80,4 @@ class CadastrarMarca(View):
         if status:
             return redirect("/comparativo/cadastrar")
         else:
-            return HttpResponse("Erro ao cadastrar meta")
+            return HttpResponse("Erro ao cadastrar marca")

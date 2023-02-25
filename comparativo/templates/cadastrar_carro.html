@@ -29,7 +29,7 @@
                         </select>
                     </div>
                     <div class="btn-modal">
-                        <button id="btn-modal" type="button"><img src="{% static "abrirModal.svg" %}"></button>
+                        <button id="btn-modal" type="button"><img src="{% static "img/add.svg" %}"></button>
                     </div>
                 </div>
 
@@ -54,6 +54,7 @@
             <div class="modal-marca" id="modal-marca" style="display: none">
                 <form id="form-marca" method="post" action="{% url "cadastrar_marca" %}">
                     {% csrf_token %}
+                    <button id="btn-fechar-modal" type="button"><img src="{% static '/img/fechar.png' %}"></button>
                     <div class="input">
                         <div class="label">
                             <label>Marca:</label>
@@ -86,6 +87,10 @@
         <script>
             $("#btn-modal").on("click", function() {
               $('#modal-marca').removeAttr("style")
+            });
+
+            $("#btn-fechar-modal").on("click", function () {
+                $("#modal-marca").css("display", "none")
             });
         </script>
     {% endblock %}

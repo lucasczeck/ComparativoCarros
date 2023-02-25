@@ -94,6 +94,11 @@ class Cadastros:
     @staticmethod
     def save_brand(pais=None, marca=None):
 
+        brand = comparativo.models.Marca.objects.filter(nome__icontains=marca)
+
+        if brand:
+            return False
+
         new_brand = comparativo.models.Marca()
 
         new_brand.nome = marca

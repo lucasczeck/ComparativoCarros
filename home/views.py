@@ -1,7 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views import View
-from django.contrib.auth.models import User
 from django.contrib.auth import logout
 
 import BO.autenticacao.login
@@ -10,7 +9,10 @@ import BO.autenticacao.login
 class Login(View):
 
     def get(self, *args, **kwargs):
-        return render(self.request, 'login.html')
+        if not self.request.user.pk:
+            return render(self.request, 'login.html')
+        else:
+            return redirect('comparativo')
 
     def post(self, *args, **kwargs):
 

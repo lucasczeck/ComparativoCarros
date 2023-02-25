@@ -1,5 +1,11 @@
+:root {
+    --hover-width: 80%;
+    --outher-width: 20%;
+    --speed: 1.5s;
+}
+
 * {
-    margin: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -7,11 +13,18 @@ body {
     color: #fff;
     font-family: sans-serif;
     margin: 0;
+    height: 100vh;
+    overflow-x: hidden;
 }
 
-main {
-    height: 90%;
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #555;
+    height: 10%;
     width: 100%;
+    color: #fff;
 }
 
 .input {
@@ -88,6 +101,7 @@ input[type="submit"]:hover {
 .campo-input {
     background-color: #555;
     height: 30px;
+    color: #dcd8d8;
 }
 
 footer {
@@ -112,10 +126,29 @@ footer {
   z-index: 999;
 }
 
-.form-marca {
-  background-color: #555;
-  padding: 20px;
-  border-radius: 10px;
-  width: 500px;
-  height: 300px;
+#form-marca {
+  position: relative;
+}
+
+#btn-fechar-modal {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #333;
+    border: none;
+}
+
+#btn-fechar-modal img {
+    height: 20px;
+    width: 20px;
+}
+
+.btn-modal img {
+    height: 20px;
+    width: 20px;
+}
+
+#btn-modal {
+    background-color: #222;
+    border: none;
 }
