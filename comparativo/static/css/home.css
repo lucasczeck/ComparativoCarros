@@ -12,24 +12,6 @@ main {
     width: 100%;
 }
 
-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #555;
-    height: 10%;
-    width: 100%;
-    color: #fff;
-}
-
-header div {
-    margin: 5px 10px;
-}
-
-.links {
-    gap: 10px;
-}
-
 .container {
     display: flex;
     align-items: center;

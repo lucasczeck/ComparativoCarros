@@ -1,0 +1,259 @@
+:root {
+  --primary-color: #222;
+  --secondary-color: #444;
+  --tertiary-color: #555;
+  --accent-color: #b00;
+  --hover-color: #d22;
+  --border-radius: 5px;
+  --box-shadow: 0 0 10px #000;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  background-color: #333;
+  color: #fff;
+  margin: 0;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--tertiary-color);
+  height: 10%;
+  width: 100%;
+  color: #fff;
+  padding: 0 20px;
+}
+
+main {
+  max-width: 1200px;
+  margin: 30px auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.table-container {
+  width: 70%;
+  background-color: var(--secondary-color);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.table-container h2 {
+  margin-top: 0;
+  font-size: 30px;
+}
+
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.table-container th,
+.table-container td {
+  padding: 10px;
+  text-align: left;
+}
+
+.table-container th {
+  background-color: var(--tertiary-color);
+  color: #fff;
+}
+
+.table-container tbody tr:nth-child(even) {
+  background-color: #555;
+}
+
+.table-container tbody tr:hover {
+  background-color: var(--tertiary-color);
+  cursor: pointer;
+}
+
+.side-container {
+  width: 28%;
+}
+
+.side-container h2 {
+  font-size: 24px;
+  margin-top: 0;
+}
+
+.side-container .approved-list {
+  margin-top: 20px;
+  background-color: var(--secondary-color);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.side-container .approved-list li {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.side-container .approved-list li span {
+  font-weight: bold;
+}
+
+.form-container {
+  width: 100%;
+  background-color: var(--secondary-color);
+  padding: 20px;
+  margin-top: 30px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.form-container h2 {
+  margin-top: 0;
+  font-size: 24px;
+}
+
+.form-container .form-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  color: #fff;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  margin: 15px 0;
+}
+
+.form-container input[type="submit"] {
+  background-color: var(--accent-color);
+  color: #fff;
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 20px 40px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 10px auto;
+  font-size: 25px;
+}
+
+.form {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #444;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.table-container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table th, .table td {
+  padding: 10px;
+  text-align: center;
+}
+
+.table th {
+  background-color: #555;
+  color: #fff;
+}
+
+.table tr:nth-child(even) {
+  background-color: #ddd;
+}
+
+.table tr:hover {
+  background-color: #bbb;
+  cursor: pointer;
+}
+
+.right-container {
+  width: 300px;
+  margin-left: 20px;
+}
+
+.approved-container {
+  max-height: 400px;
+  overflow-y: scroll;
+  margin-top: 10px;
+}
+
+.approved-car {
+  background-color: #555;
+  color: #fff;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #000;
+}
+
+.approved-car .brand {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.approved-car .model-year {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.approved-car .approved-by {
+  font-size: 12px;
+}
+
+.approved-car .approved-by:before {
+  content: "Aprovado por: ";
+  font-weight: bold;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 20px 0;
+}
+
+th, td {
+  text-align: center;
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+th {
+  background-color: #555;
+  color: white;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+button img {
+  width: 20px;
+  height: 20px;
+}

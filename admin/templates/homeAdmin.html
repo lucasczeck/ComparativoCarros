@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Administração de Carros</title>
+    <link rel="stylesheet" href={% static "css/homeAdmin.css" %}>
+</head>
+<body>
+    <header>
+        <h1>Administração de Carros</h1>
+    </header>
+    <main>
+        <section class="carros-pendentes">
+            <h2>Carros Pendentes de Aprovação</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Ano</th>
+                        <th>Aprovar</th>
+                        <th>Rejeitar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aqui será inserido dinamicamente os carros pendentes -->
+                    {% for car in cars %}
+                        <tr>
+                            <th>{{ car.marca.nome }}</th>
+                            <th>{{ car.modelo }}</th>
+                            <th>{{ car.ano }}</th>
+                            <th><button><img src="{% static "img/aprovado.svg" %}" alt="Aprovar"></button></th>
+                            <th><button><img src="{% static "img/reprovado.svg" %}" alt="Reprovar"></button></th>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+        <section class="ultimos-aprovados">
+            <h2>Últimos Carros Aprovados</h2>
+            <ul>
+                <!-- Aqui será inserido dinamicamente os últimos carros aprovados -->
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>

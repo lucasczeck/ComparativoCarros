@@ -17,7 +17,7 @@
     {% block content %}
         <main>
             <h2>Cadastre um carro</h2>
-            <form id="cadastroCarros">
+            <form id="cadastroCarros" method="post" action="{% url "cadastrar_carro" %}">
                 {% csrf_token %}
                 <div class="input">
                     <div class="label">

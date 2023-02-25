@@ -65,8 +65,8 @@ class Comparar:
 class Home:
 
     @staticmethod
-    def get_brands():
-        brands = comparativo.models.Marca.objects.filter(status=True).values_list('nome', flat=True)
+    def get_brands(cars=None):
+        brands = comparativo.models.Marca.objects.filter(status=True, nome__in=cars).values_list('nome', flat=True)
 
         return brands
 
@@ -103,19 +103,20 @@ class Cadastros:
 
         new_brand.nome = marca
         new_brand.pais_origem_id = pais
-        new_brand.status = False
+        new_brand.status = True
         new_brand.save()
 
         return True
 
     @staticmethod
-    def save_car(marca=None, modelo=None, ano=None):
+    def save_car(marca=None, modelo=None, ano=None, user=None):
 
         new_car = comparativo.models.CarrosPendentes()
 
         new_car.marca_id = marca
         new_car.modelo = modelo
         new_car.ano = ano
+        new_car.usr_aprovador_id = user
         new_car.save()
 
         return True

@@ -32,8 +32,9 @@ class Comparar(View):
     def get(self, *args, **kwargs):
         if not self.request.user.pk:
             return redirect('login')
-        brands = BO.comparativo.comparativo.Home().get_brands()
+
         car_models = BO.comparativo.comparativo.Home().get_car_models()
+        brands = BO.comparativo.comparativo.Home().get_brands(cars=car_models.values_list('marca_id', flat=True))
         years = BO.comparativo.comparativo.Home().get_model_years()
 
         context = {'brands': list(brands),
@@ -61,7 +62,8 @@ class CadastrarCarro(View):
         modelo = self.request.POST.get('modelo')
         ano = self.request.POST.get('ano')
 
-        status = BO.comparativo.comparativo.Cadastros.save_car(marca=marca, modelo=modelo, ano=ano)
+        status = BO.comparativo.comparativo.Cadastros\
+            .save_car(marca=marca, modelo=modelo, ano=ano, user=self.request.user.pk)
 
         if status:
             return redirect('/comparativo')

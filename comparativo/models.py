@@ -1,5 +1,6 @@
 from django.db import models
 from colorfield.fields import ColorField
+from django.contrib.auth.models import User
 
 
 class Continente(models.Model):
@@ -42,3 +43,6 @@ class CarrosPendentes(models.Model):
     marca = models.ForeignKey('Marca', on_delete=models.DO_NOTHING)
     modelo = models.CharField(max_length=100, null=True)
     ano = models.IntegerField(null=True)
+    status = models.BooleanField(default=False)
+    is_reprovado = models.BooleanField(default=False)
+    usr_aprovador = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True)
