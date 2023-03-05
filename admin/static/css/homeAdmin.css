@@ -257,3 +257,75 @@ button img {
   width: 20px;
   height: 20px;
 }
+
+.wrapper {
+  position: relative;
+  height: 75%;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+.modal-content {
+  background-color: #444;
+  margin: 30px auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.formApprove {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.fixSpecs, .outherSpecs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: 80%;
+}
+
+.fixSpecs div, .outherSpecs div {
+  width: 30%;
+}
+
+.inputsSpecs {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}

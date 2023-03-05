@@ -66,7 +66,10 @@ class Home:
 
     @staticmethod
     def get_brands(cars=None):
-        brands = comparativo.models.Marca.objects.filter(status=True, nome__in=cars).values_list('nome', flat=True)
+        if cars is None:
+            brands = comparativo.models.Marca.objects.filter(status=True).values_list('nome', flat=True)
+        else:
+            brands = comparativo.models.Marca.objects.filter(status=True, nome__in=cars).values_list('nome', flat=True)
 
         return brands
 

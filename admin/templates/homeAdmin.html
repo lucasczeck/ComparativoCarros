@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <title>Administração de Carros</title>
     <link rel="stylesheet" href={% static "css/homeAdmin.css" %}>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 <body>
     <header>
         <h1>Administração de Carros</h1>
     </header>
-    <main>
+    <main class="wrapper">
         <section class="carros-pendentes">
             <h2>Carros Pendentes de Aprovação</h2>
             <table>
@@ -24,13 +25,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Aqui será inserido dinamicamente os carros pendentes -->
                     {% for car in cars %}
-                        <tr>
+                        <tr data-model="{{ car.modelo }}" data-brand="{{ car.marca.nome }}" data-year="{{ car.ano }}" data-id="{{ car.id }}">
                             <th>{{ car.marca.nome }}</th>
                             <th>{{ car.modelo }}</th>
                             <th>{{ car.ano }}</th>
-                            <th><button><img src="{% static "img/aprovado.svg" %}" alt="Aprovar"></button></th>
+                            <th><button id="openModalBtn"><img src="{% static "img/aprovado.svg" %}" alt="Aprovar"></button></th>
                             <th><button><img src="{% static "img/reprovado.svg" %}" alt="Reprovar"></button></th>
                         </tr>
                     {% endfor %}
@@ -40,12 +40,156 @@
         <section class="ultimos-aprovados">
             <h2>Últimos Carros Aprovados</h2>
             <ul>
-                <!-- Aqui será inserido dinamicamente os últimos carros aprovados -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Marca</th>
+                            <th>Modelo</th>
+                            <th>Ano</th>
+                            <th>Aprovado por</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for car in last_approvals %}
+                            <tr>
+                                <th>{{ car.marca.nome }}</th>
+                                <th>{{ car.modelo }}</th>
+                                <th>{{ car.ano }}</th>
+                                <th>{{ car.usr_aprovador.username }}</th>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </ul>
         </section>
     </main>
     <footer>
         <p>&copy; 2023 Todos os direitos reservados.</p>
     </footer>
+
+    <div id="carApprovalModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+          <form id="formApprove" class="formApprove" action="{% url 'admin.aprovar' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2>Tem certeza que deseja aprovar este carro?</h2>
+            <div class="fixSpecs">
+                <div class="inputsSpecs">
+                    <label for="carBrand"><strong>Marca: </strong></label>
+                    <input type="text" id="carBrand" name="carBrand" required>
+                    <input type="hidden" id="carId", name="carId">
+                </div>
+                <div class="inputsSpecs">
+                    <label for="carModel"><strong>Modelo: </strong></label>
+                    <input type="text" id="carModel" name="carModel" required>
+                </div>
+                <div class="inputsSpecs">
+                    <label for="carYear"><strong>Ano: </strong></label>
+                    <input type="text" id="carYear" name="carYear" required>
+                </div>
+            </div>
+            <div class="outherSpecs">
+                <div class="inputsSpecs">
+                    <label for="engine"><strong>Motor: </strong></label>
+                    <input type="text" placeholder="Insira o motor" name="engine" required>
+                </div>
+                <div class="inputsSpecs">
+                    <label for="gearbox"><strong>Câmbio: </strong></label>
+                    <input type="text" placeholder="Insira o câmbio" name="gearbox" required>
+                </div>
+                <div class="inputsSpecs">
+                    <label for="length"><strong>Comprimento: </strong></label>
+                    <input type="number" step="0.01" min="0" placeholder="Insira o comprimento" name="length" required>
+                </div>
+                <div class="inputsSpecs">
+                    <label for="width"><strong>Largura: </strong></label>
+                    <input type="number" step="0.01" min="0" placeholder="Insira a largura" name="width" required>
+                </div>
+                <div class="inputsSpecs">
+                    <label for="height"><strong>Altura: </strong></label>
+                    <input type="number" step="0.01" min="0" placeholder="Insira a altura" name="height" required>
+                </div>
+                <div class="inputsSpecs">
+                    <label for="wheelbase"><strong>Entre-eixos: </strong></label>
+                    <input type="number" step="0.01" min="0" placeholder="Insira o entre-eixos" name="wheelbase" required>
+                </div>
+                <div class="inputsSpecs">
+                    <label for="weight"><strong>Peso: </strong></label>
+                    <input type="number" step="0.01" min="0" placeholder="Insira o peso" name="weight" required>
+                </div>
+                <div class="inputsSpecs">
+                    <label for="price"><strong>Preço (R$): </strong></label>
+                    <input type="number" step="0.01" min="0" placeholder="Insira o preço" name="price" required>
+                </div>
+                <div class="inputsSpecs">
+                    <label for="image"><strong>Imagem: </strong></label>
+                    <input type="file" name="image" required>
+                </div>
+                <div class="inputsSpecs">
+                    <label for="background-color"><strong>Cor de fundo: </strong></label>
+                    <input type="color" name="background-color" required>
+                </div>
+                <div class="inputsSpecs">
+                    <label for="button-color"><strong>Cor de botão: </strong></label>
+                    <input type="color" name="button-color" required>
+                </div>
+                <div class="inputsSpecs">
+                    <label for="specs-color"><strong>Cor das specs: </strong></label>
+                    <input type="color" name="specs-color" required>
+                </div>
+            </div>
+            <input type="submit" id="approveBtn" value="Aprovar">
+          </form>
+
+      </div>
+    </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById("carApprovalModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("openModalBtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal
+        btn.onclick = function() {
+          modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+          modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+
+        // When the user clicks the approve button, close the modal and approve the car
+        var approveBtn = document.getElementById("approveBtn");
+        approveBtn.onclick = function() {
+          modal.style.display = "none";
+          // Call function to approve the car
+        }
+
+        $("#openModalBtn").click(function() {
+            var carBrand = $(this).closest("tr").data("brand");
+            var carModel = $(this).closest("tr").data("model");
+            var carYear = $(this).closest("tr").data("year");
+            var carId = $(this).closest("tr").data("id")
+
+            $('#carBrand').val(carBrand)
+            $('#carModel').val(carModel)
+            $('#carYear').val(carYear)
+            $('#carId').val(carId)
+        });
+    </script>
+
 </body>
 </html>
